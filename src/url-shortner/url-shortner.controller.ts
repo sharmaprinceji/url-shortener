@@ -33,7 +33,7 @@ export class UrlShortnerController {
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Create a shortened URL' })
   @ApiBody({ type: CreateUrlDto })
-  @ApiResponse({ status: 201, description: 'URL shortened successfully' })
+  @ApiResponse({ status: 201, description: 'URL shortened successfully !' })
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async shorten(@Body() body: CreateUrlDto) {
     return this.urlService.shortenUrl(body.originalUrl, body.shortCode);
@@ -53,16 +53,16 @@ export class UrlShortnerController {
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Get stats for a short URL' })
   @ApiParam({ name: 'shortCode', required: true, description: 'Short URL code' })
-  @ApiResponse({ status: 200, description: 'Stats returned successfully' })
+  @ApiResponse({ status: 200, description: 'Stats returned successfully !' })
   async stats(@Param('shortCode') code: string) {
     return this.urlService.getStats(code);
   }
 
   @Post('api/create')
   @UseGuards(JwtAuthGuard)
-  @ApiOperation({ summary: 'Create a shortened URL with schema validation' })
+  @ApiOperation({ summary: 'Create a shortened URL with schema validation !' })
   @ApiBody({ type: CreateUrlDto })
-  @ApiResponse({ status: 201, description: 'URL created with validation' })
+  @ApiResponse({ status: 201, description: 'URL created with validation !' })
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async createWithSchema(@Body() data: CreateUrlDto) {
     return this.urlService.createShortUrl(data);

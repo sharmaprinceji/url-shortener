@@ -1,15 +1,3 @@
-// import { IsNotEmpty, IsOptional, IsString, IsUrl } from 'class-validator';
-
-// export class CreateUrlDto {
-//   @IsNotEmpty()
-//   @IsUrl()
-//   originalUrl: string;
-
-//   @IsOptional()
-//   @IsString()
-//   shortCode?: string;
-// }
-
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString, IsUrl } from 'class-validator';
 

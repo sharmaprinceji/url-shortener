@@ -96,3 +96,34 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+##  Env
+  PORT=3000
+  JWT_SECRET=supersecretkey
+  MONGODB_URI=
+  BASE_URL=http://localhost:3000
+
+##  NestJS URL Shortener (brief description)
+This is a full-featured URL Shortener API built with NestJS, MongoDB, and JWT authentication. Users can shorten long URLs into compact codes, track redirection analytics (clicks), and manage their links securely using login/signup functionality.
+
+*Feature
+ -JWT Authentication (Login & Signup)
+
+-URL Shortening with optional custom short codes 
+
+-Click tracking & analytics
+
+-Protected APIs with JWT Guards
+
+-Swagger API Documentation
+
+:-  ** (FINALLY IN SHORT) **
+
+##pre Requist to Run This Repo.
+1.Install node
+2.Install Mongodb
+3.run npm install
+4.set MONGODB_URI 
+5.npm run start:dev 
+  
+************* END *************
