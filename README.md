@@ -98,9 +98,9 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 
 ##  Env
-  PORT=3000
-  JWT_SECRET=supersecretkey
-  MONGODB_URI=
+  PORT=3000,
+  JWT_SECRET=supersecretkey,
+  MONGODB_URI="",
   BASE_URL=http://localhost:3000
 
 ##  NestJS URL Shortener (brief description)
