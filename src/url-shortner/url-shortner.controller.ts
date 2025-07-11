@@ -1,18 +1,49 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Res,
+  UsePipes,
+  ValidationPipe,
+  HttpCode,
+} from '@nestjs/common';
 import { UrlShortnerService } from './url-shortner.service';
-import { Urlshortner } from './url-shortner.schema';
+import { CreateUrlDto } from './dto/create-url.dto';
+import { ApiTags, ApiResponse, ApiBody } from '@nestjs/swagger';
+import { Response } from 'express';
 
-@Controller('url-shortner')
+@ApiTags('URL')
+@Controller()
 export class UrlShortnerController {
-    constructor(private readonly urlService:UrlShortnerService) {}
+  constructor(private readonly urlService: UrlShortnerService) {}
 
-    @Post('/create')
-    async createStudent(@Body() data:Partial<Urlshortner>) {
-        return this.urlService.createUrlTodo(data);
-    }
+  @Post('api/shorten')
+  @ApiBody({ type: CreateUrlDto })
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  @ApiResponse({ status: 201, description: 'URL shortened' })
+  async shorten(@Body() body: CreateUrlDto) {
+    return this.urlService.shortenUrl(body.originalUrl, body.shortCode);
+  }
 
-    @Get('/getAll')
-    async getAllStudents() {
-        return this.urlService.getUrlsTodos();
-    }
+  @Get('r/:shortCode')
+  @HttpCode(302)
+  @ApiResponse({ status: 302, description: 'Redirects to original URL' })
+  async redirect(@Param('shortCode') code: string, @Res() res: Response) {
+    const url = await this.urlService.redirect(code);
+    return res.redirect(url);
+  }
+
+  @Get('api/stats/:shortCode')
+  @ApiResponse({ status: 200, description: 'Stats returned' })
+  async stats(@Param('shortCode') code: string) {
+    return this.urlService.getStats(code);
+  }
+
+  @Post('api/create')
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  async createWithSchema(@Body() data: CreateUrlDto) {
+    return this.urlService.createShortUrl(data);
+  }
 }
